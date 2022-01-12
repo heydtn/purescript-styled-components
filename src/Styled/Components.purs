@@ -4,7 +4,7 @@ module Styled.Components
 
 import Prelude
 
-import Data.Array as Array
+import Data.Foldable (foldl)
 import Halogen.HTML as HH
 import Halogen.HTML.Core as HC
 import Halogen.HTML.Properties as HP
@@ -23,7 +23,7 @@ element el fns state props = el (props <> [ attr ])
   where
 
   styles :: Array Declaration
-  styles = Array.foldl (\styleProps fn -> styleProps <> fn state) [] fns
+  styles = foldl (\styleProps fn -> styleProps <> fn state) [] fns
 
   attr :: HH.IProp r i
   attr = HP.attr (HC.AttrName "style") $ inline styles
